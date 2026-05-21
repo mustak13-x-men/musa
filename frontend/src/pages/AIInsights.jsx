@@ -36,7 +36,6 @@ const AIInsights = () => {
   const [rawGoals, setRawGoals] = useState([]);
   const [error, setError] = useState('');
   
-  // Action checklist checkboxes state
   const [checkedActions, setCheckedActions] = useState({});
 
   const loadAIModuleData = async () => {
@@ -56,7 +55,6 @@ const AIInsights = () => {
       setRawExpenses(expensesData);
       setRawGoals(goalsData);
 
-      // Pre-initialize checklist checkboxes
       if (aiData && aiData.suggestions) {
         const initialChecks = {};
         aiData.suggestions.forEach((_, idx) => {
@@ -90,13 +88,11 @@ const AIInsights = () => {
     }));
   };
 
-  // Compile Bar chart dataset for Category Current vs Forecasted values
   const getForecastChartData = () => {
     if (!rawExpenses || !predictions || !predictions.category_forecast) {
       return { labels: [], datasets: [] };
     }
 
-    // Group actual current spending
     const currentCategoryTotals = {};
     rawExpenses.forEach(exp => {
       currentCategoryTotals[exp.category] = (currentCategoryTotals[exp.category] || 0) + exp.amount;
@@ -160,9 +156,8 @@ const AIInsights = () => {
     }
   };
 
-  // Compile styled PDF Report Print view
   const handleDownloadPDFReport = () => {
-    // Generate isolated window for a beautiful structured invoice-style print
+    
     const printWindow = window.open('', '_blank');
     if (!printWindow) {
       alert('Pop-up blocker is active. Please allow pop-ups to print PDF reports!');
@@ -306,14 +301,12 @@ const AIInsights = () => {
   return (
     <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       
-      {/* Visual top projection bar */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: '1.2fr 2fr',
         gap: '2rem'
       }}>
         
-        {/* Next month predictive spend widget */}
         <div className="glass-panel" style={{
           padding: '2rem',
           background: 'radial-gradient(circle at 100% 0%, rgba(99, 102, 241, 0.15) 0%, rgba(17, 24, 43, 0.65) 60%)',

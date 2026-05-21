@@ -31,18 +31,16 @@ const Navbar = () => {
     const selected = e.target.value;
     localStorage.setItem('app_currency', selected);
     setCurrency(selected);
-    // Dispatch custom event to notify other components instantly
+    
     window.dispatchEvent(new Event('currencyChange'));
   };
 
-  // Compile active alerts dynamically
   useEffect(() => {
     const generateAlerts = async () => {
       if (!user) return;
       try {
         const alertsList = [];
         
-        // 1. Fetch Expenses to see if they are high
         const expenses = await fetchExpenses();
         const total = expenses.reduce((sum, item) => sum + item.amount, 0);
         
@@ -55,7 +53,6 @@ const Navbar = () => {
           });
         }
 
-        // Check if Shopping exceeds 35% of total spending
         const shoppingTotal = expenses
           .filter(e => e.category === 'Shopping')
           .reduce((sum, item) => sum + item.amount, 0);
@@ -68,7 +65,6 @@ const Navbar = () => {
           });
         }
 
-        // 2. Fetch savings goals to see if there are deadlines within 30 days
         const goals = await fetchGoals();
         goals.forEach(goal => {
           if (goal.progress_percent >= 100) {
@@ -92,7 +88,6 @@ const Navbar = () => {
           }
         });
 
-        // If no alerts exist, add a helpful greeting
         if (alertsList.length === 0) {
           alertsList.push({
             id: 'alert-welcome',
@@ -112,7 +107,6 @@ const Navbar = () => {
 
     generateAlerts();
 
-    // Listen to local currency adjustments
     const onCurrencyChange = () => {
       setCurrency(localStorage.getItem('app_currency') || '₹');
     };
@@ -133,16 +127,14 @@ const Navbar = () => {
       borderRadius: '20px',
       position: 'relative'
     }}>
-      {/* Title */}
+      
       <div>
         <h1 style={{ fontSize: '1.5rem', fontWeight: 800 }}>{titles.main}</h1>
         <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>{titles.desc}</p>
       </div>
 
-      {/* Toolbar actions */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
         
-        {/* Currency selector widget */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
@@ -174,7 +166,6 @@ const Navbar = () => {
           </select>
         </div>
 
-        {/* Calendar widget */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
@@ -192,7 +183,6 @@ const Navbar = () => {
           <span>{new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
         </div>
 
-        {/* Notifications center */}
         <div style={{ position: 'relative' }}>
           <button 
             onClick={() => {
@@ -237,7 +227,6 @@ const Navbar = () => {
             )}
           </button>
 
-          {/* Notifications dropdown menu */}
           {showNotifications && (
             <div className="glass-panel" style={{
               position: 'absolute',

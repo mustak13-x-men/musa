@@ -45,7 +45,7 @@ const Login = () => {
       position: 'relative',
       overflow: 'hidden'
     }}>
-      {/* Background radial glowing effects */}
+      
       <div style={{
         position: 'absolute',
         top: '20%',
@@ -75,7 +75,7 @@ const Login = () => {
         zIndex: 10,
         boxShadow: 'var(--shadow-lg)'
       }}>
-        {/* Brand header */}
+        
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '2.5rem', textAlign: 'center' }}>
           <div style={{
             background: 'linear-gradient(135deg, #6366f1 0%, #a78bfa 100%)',
@@ -97,7 +97,6 @@ const Login = () => {
           </p>
         </div>
 
-        {/* Form alerts */}
         {error && (
           <div style={{
             display: 'flex',
@@ -117,7 +116,6 @@ const Login = () => {
           </div>
         )}
 
-        {/* Inputs */}
         <form onSubmit={handleSubmit}>
           <div className="form-group" style={{ position: 'relative' }}>
             <label className="form-label">Email Address</label>
@@ -175,7 +173,6 @@ const Login = () => {
           </button>
         </form>
 
-        {/* Redirect toggle */}
         <p style={{
           textAlign: 'center',
           fontSize: '0.85rem',

@@ -41,7 +41,7 @@ const Sidebar = () => {
       zIndex: 50,
       borderRadius: '24px'
     }}>
-      {/* Brand logo */}
+      
       <div>
         <div style={{
           display: 'flex',
@@ -71,7 +71,6 @@ const Sidebar = () => {
           </div>
         </div>
 
-        {/* Navigation list */}
         <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -101,7 +100,6 @@ const Sidebar = () => {
         </nav>
       </div>
 
-      {/* User profile and logout */}
       <div style={{
         display: 'flex',
         flexDirection: 'column',
@@ -156,7 +154,6 @@ const Sidebar = () => {
         </button>
       </div>
 
-      {/* Embedded local CSS rules for link active styles */}
       <style>{`
         .sidebar-link:hover {
           background: rgba(255, 255, 255, 0.05);

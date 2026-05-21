@@ -9,7 +9,6 @@ const apiClient = axios.create({
   },
 });
 
-// Request interceptor to automatically attach authorization token
 apiClient.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('jwt_token');
@@ -23,7 +22,6 @@ apiClient.interceptors.request.use(
   }
 );
 
-// Auth endpoints
 export const registerUser = async (userData) => {
   const response = await apiClient.post('/register', userData);
   return response.data;
@@ -34,7 +32,6 @@ export const loginUser = async (credentials) => {
   return response.data;
 };
 
-// Expense endpoints
 export const fetchExpenses = async (params = {}) => {
   const response = await apiClient.get('/expenses', { params });
   return response.data;
@@ -55,7 +52,6 @@ export const deleteExpense = async (id) => {
   return response.data;
 };
 
-// Savings goal endpoints
 export const fetchGoals = async () => {
   const response = await apiClient.get('/goals');
   return response.data;
@@ -76,7 +72,6 @@ export const deleteGoal = async (id) => {
   return response.data;
 };
 
-// AI Insights endpoints
 export const getAISuggestions = async () => {
   const response = await apiClient.post('/ai/analyze');
   return response.data;

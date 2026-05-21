@@ -31,13 +31,11 @@ const Expenses = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // Filters
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('All');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
-  // Form State
   const [isEditing, setIsEditing] = useState(false);
   const [currentEditId, setCurrentEditId] = useState(null);
   const [formTitle, setFormTitle] = useState('');
@@ -131,7 +129,6 @@ const Expenses = () => {
     setFormDescription(item.description);
     setFormDate(item.date);
     
-    // Smooth scroll to form on mobile devices
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -156,7 +153,6 @@ const Expenses = () => {
   return (
     <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       
-      {/* Visual alerts bar */}
       {error && (
         <div style={{
           display: 'flex',
@@ -175,7 +171,6 @@ const Expenses = () => {
         </div>
       )}
 
-      {/* Main Grid: Form and Transaction Feed side-by-side */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: '1fr 2.2fr',
@@ -183,7 +178,6 @@ const Expenses = () => {
         alignItems: 'start'
       }}>
         
-        {/* Interactive Add/Edit Form Panel */}
         <div className="glass-panel" style={{
           padding: '2rem',
           position: 'sticky',
@@ -292,14 +286,11 @@ const Expenses = () => {
           </form>
         </div>
 
-        {/* Expenses List & Filter Feed */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           
-          {/* Advanced Filtering bar */}
           <div className="glass-panel" style={{ padding: '1.5rem' }}>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center', justifyContent: 'space-between' }}>
               
-              {/* Search text input */}
               <div style={{ position: 'relative', flex: 1, minWidth: '220px' }}>
                 <Search size={16} color="var(--text-muted)" style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)' }} />
                 <input
@@ -312,7 +303,6 @@ const Expenses = () => {
                 />
               </div>
 
-              {/* Category picker filter */}
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -345,7 +335,6 @@ const Expenses = () => {
                 </select>
               </div>
 
-              {/* Date Filters Trigger */}
               <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
                 <input
                   type="date"
@@ -364,7 +353,6 @@ const Expenses = () => {
                 />
               </div>
 
-              {/* Clear button */}
               {(searchTerm || categoryFilter !== 'All' || startDate || endDate) && (
                 <button
                   className="btn btn-outline"
@@ -378,7 +366,6 @@ const Expenses = () => {
             </div>
           </div>
 
-          {/* Transactions Feed */}
           <div className="glass-panel" style={{ padding: '1.5rem', minHeight: '400px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
               <h3 style={{ fontSize: '1.1rem', fontWeight: 700 }}>Audit Ledger</h3>
@@ -402,7 +389,7 @@ const Expenses = () => {
                     border: '1px solid var(--glass-border)',
                     transition: 'all var(--transition-fast)'
                   }}>
-                    {/* Left: Info */}
+                    
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                       <div style={{
                         width: '42px',
@@ -443,7 +430,6 @@ const Expenses = () => {
                       </div>
                     </div>
 
-                    {/* Right: Actions and amount */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
                       <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fb7185' }}>
                         -{currency}{item.amount.toFixed(2)}

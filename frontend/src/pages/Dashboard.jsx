@@ -57,7 +57,6 @@ const Dashboard = () => {
   const [aiAnalysis, setAiAnalysis] = useState(null);
   const [loading, setLoading] = useState(true);
   
-  // Quick stats
   const [totalSpent, setTotalSpent] = useState(0);
   const [totalSaved, setTotalSaved] = useState(0);
   const [healthScore, setHealthScore] = useState(85);
@@ -66,7 +65,6 @@ const Dashboard = () => {
     try {
       setLoading(true);
       
-      // Fetch concurrent API data
       const [expensesData, goalsData, aiData] = await Promise.all([
         fetchExpenses(),
         fetchGoals(),
@@ -83,16 +81,13 @@ const Dashboard = () => {
         setAiAnalysis(aiData);
       }
 
-      // Calculations
       const totalExp = expensesData.reduce((sum, item) => sum + item.amount, 0);
       setTotalSpent(totalExp);
 
       const totalSav = goalsData.reduce((sum, item) => sum + item.saved_amount, 0);
       setTotalSaved(totalSav);
 
-      // Financial Health Index math:
-      // Ratio of Savings to Expenses. High ratio yields higher score, up to 100.
-      let score = 50; // base score
+      let score = 50; 
       if (totalExp === 0 && totalSav > 0) score = 100;
       else if (totalExp > 0) {
         const ratio = totalSav / totalExp;
@@ -102,7 +97,6 @@ const Dashboard = () => {
         else score = 45;
       }
       
-      // Deduct slightly for any warning flags
       if (aiData && aiData.warnings && aiData.warnings.length > 0) {
         score = Math.max(30, score - (aiData.warnings.length * 5));
       }
@@ -118,7 +112,6 @@ const Dashboard = () => {
   useEffect(() => {
     loadDashboardData();
 
-    // Re-verify currency changes
     const onCurrencyChange = () => {
       setCurrency(localStorage.getItem('app_currency') || '₹');
     };
@@ -126,7 +119,6 @@ const Dashboard = () => {
     return () => window.removeEventListener('currencyChange', onCurrencyChange);
   }, []);
 
-  // Format charts collections
   const getDoughnutData = () => {
     const categoryBreakdown = {};
     expenses.forEach(exp => {
@@ -152,14 +144,14 @@ const Dashboard = () => {
   };
 
   const getLineData = () => {
-    // Group expenses by date and aggregate
+    
     const dateAggregates = {};
     expenses.slice().reverse().forEach(exp => {
-      const d = exp.date; // formatted as YYYY-MM-DD
+      const d = exp.date; 
       dateAggregates[d] = (dateAggregates[d] || 0) + exp.amount;
     });
 
-    const dates = Object.keys(dateAggregates).slice(-7); // take last 7 active transaction days
+    const dates = Object.keys(dateAggregates).slice(-7); 
     const amounts = Object.values(dateAggregates).slice(-7);
 
     return {
@@ -241,13 +233,12 @@ const Dashboard = () => {
   return (
     <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       
-      {/* 1. Summary Cards row */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
         gap: '1.5rem'
       }}>
-        {/* Expenses Card */}
+        
         <div className="glass-panel glass-panel-hoverable" style={{ padding: '1.75rem', display: 'flex', alignItems: 'center', gap: '1.25rem', borderLeft: '4px solid var(--accent)' }}>
           <div style={{ background: 'rgba(244, 63, 94, 0.1)', padding: '0.75rem', borderRadius: '12px', color: 'var(--accent)' }}>
             <TrendingUp size={24} />
@@ -260,7 +251,6 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Savings Card */}
         <div className="glass-panel glass-panel-hoverable" style={{ padding: '1.75rem', display: 'flex', alignItems: 'center', gap: '1.25rem', borderLeft: '4px solid var(--secondary)' }}>
           <div style={{ background: 'rgba(16, 185, 129, 0.1)', padding: '0.75rem', borderRadius: '12px', color: 'var(--secondary)' }}>
             <Wallet size={24} />
@@ -273,7 +263,6 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Goals Progress */}
         <div className="glass-panel glass-panel-hoverable" style={{ padding: '1.75rem', display: 'flex', alignItems: 'center', gap: '1.25rem', borderLeft: '4px solid var(--primary)' }}>
           <div style={{ background: 'rgba(99, 102, 241, 0.1)', padding: '0.75rem', borderRadius: '12px', color: 'var(--primary)' }}>
             <Receipt size={24} />
@@ -286,7 +275,6 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Health Index Card */}
         <div className="glass-panel glass-panel-hoverable" style={{ padding: '1.75rem', display: 'flex', alignItems: 'center', gap: '1.25rem', borderLeft: '4px solid #a78bfa' }}>
           <div style={{ background: 'rgba(167, 139, 250, 0.1)', padding: '0.75rem', borderRadius: '12px', color: '#a78bfa' }}>
             <ShieldCheck size={24} />
@@ -305,13 +293,12 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* 2. Main analytical charts grid */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: '2fr 1fr',
         gap: '1.5rem'
       }}>
-        {/* Line graph trend */}
+        
         <div className="glass-panel" style={{ padding: '1.75rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
             <h3 style={{ fontSize: '1.1rem', fontWeight: 700 }}>Transaction Velocity (Last 7 Active Days)</h3>
@@ -329,7 +316,6 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Doughnut category distribution */}
         <div className="glass-panel" style={{ padding: '1.75rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
             <h3 style={{ fontSize: '1.1rem', fontWeight: 700 }}>Category Share</h3>
@@ -345,13 +331,12 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* 3. Bottom Grid: Recent Transactions and AI Insights widget */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: '1.2fr 1fr',
         gap: '1.5rem'
       }}>
-        {/* Recent Transactions List */}
+        
         <div className="glass-panel" style={{ padding: '1.75rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
@@ -421,7 +406,6 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* AI Insight Smart Coach Preview */}
         <div className="glass-panel" style={{
           padding: '1.75rem',
           background: 'radial-gradient(circle at 100% 0%, rgba(99, 102, 241, 0.15) 0%, rgba(17, 24, 43, 0.65) 60%)',

@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user session exists in local storage
+    
     const storedToken = localStorage.getItem('jwt_token');
     const storedUser = localStorage.getItem('user_info');
 
@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
         setUser(JSON.parse(storedUser));
       } catch (err) {
         console.error("Error parsing local storage auth session", err);
-        // Clear corrupt data
+        
         localStorage.removeItem('jwt_token');
         localStorage.removeItem('user_info');
       }

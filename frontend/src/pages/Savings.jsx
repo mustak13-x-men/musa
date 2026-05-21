@@ -21,7 +21,6 @@ const Savings = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // Form State
   const [isEditing, setIsEditing] = useState(false);
   const [currentEditId, setCurrentEditId] = useState(null);
   const [formGoalName, setFormGoalName] = useState('');
@@ -30,7 +29,6 @@ const Savings = () => {
   const [formDeadline, setFormDeadline] = useState('');
   const [formLoading, setFormLoading] = useState(false);
 
-  // Calculator State
   const [calcMonthlySaving, setCalcMonthlySaving] = useState('5000');
   const [calcResult, setCalcResult] = useState('');
 
@@ -58,7 +56,6 @@ const Savings = () => {
     return () => window.removeEventListener('currencyChange', onCurrencyChange);
   }, []);
 
-  // Update calculator whenever monthly contribution or active goals change
   useEffect(() => {
     if (goals.length === 0) {
       setCalcResult('Add active savings goals to calculate achievements.');
@@ -71,7 +68,6 @@ const Savings = () => {
       return;
     }
 
-    // Compute remaining cash needed
     const totalRemaining = goals.reduce((sum, g) => sum + Math.max(0, g.target_amount - g.saved_amount), 0);
     if (totalRemaining === 0) {
       setCalcResult('Awesome! All your savings goals have been fully funded!');
@@ -158,7 +154,6 @@ const Savings = () => {
   return (
     <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       
-      {/* Alert indicators */}
       {error && (
         <div style={{
           display: 'flex',
@@ -177,7 +172,6 @@ const Savings = () => {
         </div>
       )}
 
-      {/* Main Grid: Form/Calculator & Goal list */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: '1fr 2.2fr',
@@ -185,10 +179,8 @@ const Savings = () => {
         alignItems: 'start'
       }}>
         
-        {/* Left: Input parameters */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
           
-          {/* Create Goal Form */}
           <div className="glass-panel" style={{ padding: '2rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.5rem' }}>
               <Target size={18} color="var(--secondary)" />
@@ -266,7 +258,6 @@ const Savings = () => {
             </form>
           </div>
 
-          {/* Interactive Calculator Widget */}
           <div className="glass-panel" style={{
             padding: '1.75rem',
             background: 'radial-gradient(circle at 0% 100%, rgba(16, 185, 129, 0.1) 0%, rgba(17, 24, 43, 0.65) 60%)',
@@ -309,7 +300,6 @@ const Savings = () => {
 
         </div>
 
-        {/* Right: Goals progress card grids */}
         <div className="glass-panel" style={{ padding: '2rem', minHeight: '500px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
             <h3 style={{ fontSize: '1.15rem', fontWeight: 700 }}>Savings Milestones</h3>
@@ -343,7 +333,7 @@ const Savings = () => {
                     overflow: 'hidden',
                     transition: 'all var(--transition-fast)'
                   }}>
-                    {/* Visual completions stamp */}
+                    
                     {isCompleted && (
                       <div style={{
                         position: 'absolute',
@@ -365,7 +355,6 @@ const Savings = () => {
                       </div>
                     )}
 
-                    {/* Title Details */}
                     <div>
                       <h4 style={{ fontSize: '1.1rem', fontWeight: 800, paddingRight: isCompleted ? '5rem' : '0' }}>
                         {item.goal_name}
@@ -378,7 +367,6 @@ const Savings = () => {
                         </span>
                       </div>
 
-                      {/* Progress line */}
                       <div className="progress-container" style={{ height: '6px', marginBottom: '1.25rem' }}>
                         <div className="progress-fill" style={{ 
                           width: `${item.progress_percent}%`,
@@ -386,7 +374,6 @@ const Savings = () => {
                         }} />
                       </div>
 
-                      {/* Math outlines */}
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '1.25rem', background: 'rgba(255, 255, 255, 0.01)', padding: '0.75rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.03)' }}>
                         <div>
                           <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'block' }}>Saved Outflow</span>
@@ -403,7 +390,6 @@ const Savings = () => {
                       </div>
                     </div>
 
-                    {/* Timeline & Actions */}
                     <div style={{ borderTop: '1px solid var(--glass-border)', paddingTop: '1rem', marginTop: '0.5rem' }}>
                       {!isCompleted ? (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '1rem' }}>

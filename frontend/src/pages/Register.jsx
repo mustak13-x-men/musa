@@ -53,7 +53,7 @@ const Register = () => {
       position: 'relative',
       overflow: 'hidden'
     }}>
-      {/* Background radial glowing effects */}
+      
       <div style={{
         position: 'absolute',
         top: '20%',
@@ -83,7 +83,7 @@ const Register = () => {
         zIndex: 10,
         boxShadow: 'var(--shadow-lg)'
       }}>
-        {/* Brand header */}
+        
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '2.5rem', textAlign: 'center' }}>
           <div style={{
             background: 'linear-gradient(135deg, #10b981 0%, #3b82f6 100%)',
@@ -105,7 +105,6 @@ const Register = () => {
           </p>
         </div>
 
-        {/* Dynamic Alerts */}
         {error && (
           <div style={{
             display: 'flex',
@@ -144,7 +143,6 @@ const Register = () => {
           </div>
         )}
 
-        {/* Inputs */}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label className="form-label">Username</label>
@@ -218,7 +216,6 @@ const Register = () => {
           </button>
         </form>
 
-        {/* Redirect toggle */}
         <p style={{
           textAlign: 'center',
           fontSize: '0.85rem',
