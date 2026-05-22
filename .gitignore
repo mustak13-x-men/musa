@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+
+# Build outputs
+frontend/dist/
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment variables (contains secrets)
+backend/.env
+frontend/.env
+
+# Virtual environments
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Generated utility scripts
+strip_all_comments.py
+generate_pdf.py
+compile_next_steps_pdf.py
