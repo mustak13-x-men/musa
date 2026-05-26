@@ -1,0 +1,59 @@
+{
+  "users": [
+    {
+      "username": "testuser",
+      "email": "test@example.com",
+      "password_hash": "$2b$12$SXAVKiXBoncmcLpF9ca8gePKIkHQ7V3.nF7aMkZ7cN7MtM5G6yFIy",
+      "created_at": {
+        "$date": "2026-05-26T06:23:10.702000"
+      },
+      "_id": {
+        "$oid": "6a153c4e3cceddfe75ab0c35"
+      }
+    },
+    {
+      "username": "mustak",
+      "email": "md3133613@gmail.com",
+      "password_hash": "$2b$12$EdA51KguedwhmNEg.cXgOu9qknguCl8gFktIXDI926xYMoPV2veve",
+      "created_at": {
+        "$date": "2026-05-26T08:05:27.232000"
+      },
+      "_id": {
+        "$oid": "6a155447670dc33baf3dc9b7"
+      }
+    }
+  ],
+  "expenses": [
+    {
+      "title": "shop",
+      "amount": 40.0,
+      "category": "Food",
+      "description": "",
+      "date": {
+        "$date": "2026-05-26T00:00:00"
+      },
+      "user_id": {
+        "$oid": "6a155447670dc33baf3dc9b7"
+      },
+      "_id": {
+        "$oid": "6a1554b8670dc33baf3dc9b8"
+      }
+    }
+  ],
+  "savings": [
+    {
+      "goal_name": "laptop",
+      "target_amount": 1000000.0,
+      "saved_amount": 0.0,
+      "deadline": {
+        "$date": "2026-07-04T00:00:00"
+      },
+      "user_id": {
+        "$oid": "6a155447670dc33baf3dc9b7"
+      },
+      "_id": {
+        "$oid": "6a155574670dc33baf3dc9b9"
+      }
+    }
+  ]
+}
