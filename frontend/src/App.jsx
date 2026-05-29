@@ -4,6 +4,7 @@ import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
+import MoneyChatbot from './components/MoneyChatbot';
 
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -28,6 +29,7 @@ const DashboardLayout = ({ children }) => {
           </main>
         </div>
       </div>
+      <MoneyChatbot />
     </div>
   );
 };
