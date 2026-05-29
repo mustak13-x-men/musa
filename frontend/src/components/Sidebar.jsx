@@ -63,7 +63,7 @@ const Sidebar = () => {
           </div>
           <div>
             <h2 style={{ fontSize: '1.25rem', fontWeight: 800, letterSpacing: '-0.5px' }}>
-              Antigravity <span className="gradient-text">Spend</span>
+              Sasu <span className="gradient-text">Spend</span>
             </h2>
             <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px', marginTop: '1px' }}>
               AI Smart Tracker
